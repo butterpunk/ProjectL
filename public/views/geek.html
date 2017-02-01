@@ -1,0 +1,31 @@
+<div class="jumbotron text-center">
+	<h1>Geek City</h1>
+
+	<p>{{ tagline }}</p>
+</div>
+<body>
+<form action="/api/challenges" method="POST">
+<h2>Create a Challenge (I dare you)</h2>
+  <input type="text" placeholder="place" name="place">
+  <input type="text" placeholder="points" name="points">
+  <input type="text" placeholder="description" name="description">
+  <input type="text" placeholder="lat" name="lat">
+  <input type="text" placeholder="long" name="long">
+  <button type="submit">Submit</button>
+</form>
+
+<form action="/signup" method="POSt">
+	<h2>SIGNUP</h2>
+  <input type="text" placeholder="email" name="email">
+  <input type="text" placeholder="password" name="password">
+  <button type="submit">Submit</button>
+</form>
+
+<form action="/login" method="POSt">
+	<h2>LOGIN</h2>
+  <input type="text" placeholder="email" name="email">
+  <input type="text" placeholder="password" name="password">
+  <button type="submit">Submit</button>
+</form>
+
+</body>
