@@ -9,5 +9,12 @@
 	    });
 }])
 .controller('MainController', function($scope, $log, uiGmapGoogleMapApi, Nerd, $http) {
-	console.log('hello');
+		Nerd.getVerify().then(function(res){
+		console.log(res);
+		if(res.data.message == "NO"){
+			$location.path("/");
+		}else{
+
+		}
+	});
 });

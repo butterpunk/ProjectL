@@ -2,18 +2,20 @@ angular.module('NerdService', []).factory('Nerd', ['$http', function($http) {
 
     return {
         // call to get all nerds
-        savePost : function(title,body) {
-            console.log(title,body);
-            obj = {
-                'title': title,
-                'content': body
-            };
-            return $http.post('/api/challenges',obj);
+        getLogin : function(obj) {
+            return $http.post('/api/user/login',obj)
+                    .success(function(data){})
+                    .error(function(data){});
         },
-        getPostById: function(data){
-            console.log(data);
-            id = data;
-            return $http.get('api/challenges/?id='+id);
+        setSignup: function(data){
+            return $http.post('/api/user/signup',data)              
+                    .success(function(data){})
+                    .error(function(data){});
+        },
+        getVerify: function(){
+            return $http.post('/verify')              
+                    .success(function(data){})
+                    .error(function(data){});
         }
     }     
 	

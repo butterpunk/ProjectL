@@ -1,1 +1,13 @@
-<h1>Hello World</h1>
+<md-input-container class="md-block" flex-gt-sm>
+	<label>Email</label>
+	<input ng-model="user.email">
+</md-input-container>
+
+<md-input-container class="md-block" flex-gt-sm>
+	<label>Password</label>
+	<input ng-model="user.password">
+</md-input-container>
+
+<md-button ng-click="login()" class="md-raised md-primary">Login</md-button>
+<md-button ng-click="signup()" class="md-raised">Signup</md-button>
+<span>{{error}}</span>

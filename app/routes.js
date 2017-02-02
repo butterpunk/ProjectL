@@ -141,9 +141,6 @@ module.exports = function(app,passport) {
 
     });
 
-    app.get('/user/login', function(req,res){
-
-    });
     //apparently its this easy with passport! http://passportjs.org/docs
     app.get('/logout', function(req, res){
         console.log("passport logging out")
@@ -151,7 +148,9 @@ module.exports = function(app,passport) {
         res.redirect('/');
     });
 
-    app.post('/signup', function(req,res,next){ passport.authenticate('local-signup', function(err, user,info){
+    app.post('/api/user/signup', function(req,res,next){ 
+    passport.authenticate('local-signup', function(err, user,info){
+    console.log('in signup:',req);
     if (err) {
       return next(err); // will generate a 500 error
     }
@@ -171,10 +170,10 @@ module.exports = function(app,passport) {
       }
       return res.send({ success : true, message : 'authentication succeeded', points: user.points });
     });      
-  })(req, res, next);
+  })(req, res, next); 
 });
 
-app.post('/login', function(req, res, next) {
+app.post('/api/user/login', function(req, res, next) {
         passport.authenticate('local-login', function(err, user, info) {
         if (err) {
           return next(err); // will generate a 500 error
