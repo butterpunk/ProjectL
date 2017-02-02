@@ -148,6 +148,8 @@ module.exports = function(app,passport) {
         res.redirect('/');
     });
 
+    app.get('/auth/facebook', passport.authenticate('facebook'));
+
     app.post('/api/user/signup', function(req,res,next){ 
     passport.authenticate('local-signup', function(err, user,info){
     console.log('in signup:',req);
@@ -206,6 +208,24 @@ app.post('/api/user/login', function(req, res, next) {
             challenge: req.user.challenges
         };
         res.send(response);
+    });
+// =====================================
+    // FACEBOOK ROUTES =====================
+    // =====================================
+    // route for facebook authentication and login
+  
+
+    // handle the callback after facebook has authenticated the user
+    app.get('/auth/facebook/callback',
+        passport.authenticate('facebook', {
+            successRedirect : '/profile',
+            failureRedirect : '/'
+        }));
+
+    // route for logging out
+    app.get('/logout', function(req, res) {
+        req.logout();
+        res.redirect('/');
     });
 
 };
