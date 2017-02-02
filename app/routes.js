@@ -148,7 +148,25 @@ module.exports = function(app,passport) {
         res.redirect('/');
     });
 
-    app.get('/auth/facebook', passport.authenticate('facebook'));
+    app.get('/auth/facebook', passport.authenticate('facebook', { 'scope' : 'email' }));
+   /*
+    app.get('/auth/facebook', function(req, res, next){
+        passport.authenticate('facebook')(req, res, next);
+    });    
+    */
+    // =====================================
+    // FACEBOOK ROUTES =====================
+    // =====================================
+    // route for facebook authentication and login
+  
+
+    // handle the callback after facebook has authenticated the user
+    app.get('/auth/facebook/callback', passport.authenticate('facebook', {
+            successRedirect : '/map',
+            failureRedirect : '/'
+    }));
+   
+ 
 
     app.post('/api/user/signup', function(req,res,next){ 
     passport.authenticate('local-signup', function(err, user,info){
@@ -209,18 +227,7 @@ app.post('/api/user/login', function(req, res, next) {
         };
         res.send(response);
     });
-// =====================================
-    // FACEBOOK ROUTES =====================
-    // =====================================
-    // route for facebook authentication and login
-  
 
-    // handle the callback after facebook has authenticated the user
-    app.get('/auth/facebook/callback',
-        passport.authenticate('facebook', {
-            successRedirect : '/profile',
-            failureRedirect : '/'
-        }));
 
     // route for logging out
     app.get('/logout', function(req, res) {

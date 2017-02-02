@@ -8,7 +8,7 @@
 	        libraries: 'weather,geometry,visualization'
 	    });
 }])
-.controller('MainController', function($scope, $log, uiGmapGoogleMapApi, Nerd, $http) {
+.controller('MainController', function($scope, $log, uiGmapGoogleMapApi, Nerd, $http,$location) {
 		Nerd.getVerify().then(function(res){
 		console.log(res);
 		if(res.data.message == "NO"){
