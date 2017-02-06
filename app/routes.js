@@ -5,7 +5,7 @@ const app = express()
 
 app.use(bodyParser.urlencoded({extended: true}))
 
-var Nerd = require('./models/Nerd.js');
+var Profile = require('./models/Nerd.js');
 var Post = require('./models/Challenge.js');
 var User = require('./models/Users.js');
 
@@ -42,75 +42,47 @@ module.exports = function(app,passport) {
         })
     });
 
-    app.post('/api/challenges/upvote', isLoggedIn, function(req, res){
-        console.log(req.body);
-        Challenge.findById(req.body.id,function(err,chal){
-            if(err){
-                res.status(500).send(err);
-            }else{
-                // console.log(chal);
-                chal.points = chal.points + 25;
-                User.findById(req.user.id, function(err,us){
-                    us.points = us.points - 25;
-                    us.save(function(err,u){
-                        //if(err){
-                        //    res.status(500).send(err);
-                        //}
-                        //res.send(u);
-                    })
-                })                  
-                
-                chal.save(function(err, chal){
-                    if(err){
-                        res.status(500).send(err);
-                    }
-                    res.send(chal);
-                });
-            }
-
-        });
-    });
-
-    app.post('/api/challenges/downvote',isLoggedIn, function(req, res){
-        Challenge.findById(req.body.id,function(err,chal){
-            if(err){
-                res.status(500).send(err);
-            }else{
-                
-                chal.points = chal.points - 25;
-                console.log(req.user.id);
-                
-                User.findById(req.user.id, function(err,us){
-                    us.points = us.points - 25;
-                    us.save(function(err,u){
-                        //if(err){
-                        //    res.status(500).send(err);
-                        //}
-                        //res.send(u);
-                    })
-                }) 
-                chal.save(function(err, chal){
-                    if(err){
-                        res.status(500).send(err);
-                    }
-                    res.send(chal);
-                });
-            }
-
-        });
-    });
-
     
-    app.get('/api/challenges', function(req, res) {
-        // use mongoose to get all nerds in the database
-        console.log(req.query.id);
-        Post.findById(req.query.id, function(err, nerds) {
-            if (err)
-                res.send(err);
+    app.get('/api/profile', function(req, res) {
+        console.log(req.query.user_id);
+        Profile.findOne({'user_id': req.query.user_id}, function(err,prof){
+            if(err){
+                console.log('ERROR:', err);
+            }else if(prof){
+                console.log('IN ELSE IF: ', prof);
+                res.json(prof);
+            }else{
+                console.log('IN ELSE:', prof);
+                res.json({message: "Profile doesnt exist"});
 
-            res.json(nerds); // return all nerds in JSON format
+            }   
         });
+
     }); 
+    app.post('/api/profile', function(req, res){
+        Profile.findOne({'user_id': req.body.user_id}, function(err,prof){
+            if(err){
+                console.log('ERROR:', err);
+            }else if(prof){
+                console.log('IN ELSE IF PROF:',prof);
+            }else{
+                //console.log('IN ELSE:',prof);
+                console.log(req.body);
+                var profile = new Profile();
+                
+                profile.name = req.body.name;
+                profile.age = req.body.age; 
+                profile.user_id = req.body.user_id;
+                profile.save(function(err){
+                    console.log(profile)
+                    if (err)
+                        res.send(err);
+
+                    res.json({message: "Post Created!"})
+                });
+            }   
+        });
+    });
 
     app.get('/user', function(req,res){
         User.find(function(err, nerds) {
@@ -219,11 +191,9 @@ app.post('/api/user/login', function(req, res, next) {
 	});
 
     app.post('/verify', isLoggedIn, function(req, res){
-        console.log(req.user.points);
         response = {
             message : "YES",
-            points: req.user.points,
-            challenge: req.user.challenges
+            user_id : req.user.id
         };
         res.send(response);
     });

@@ -1,1 +1,12 @@
 <h1>Now you're going to fill out your profile</h1>
+<md-input-container class="md-block" flex-gt-sm>
+	<label>Name</label>
+	<input ng-model="profile.name">
+</md-input-container>
+
+<md-input-container class="md-block" flex-gt-sm>
+	<label>Age</label>
+	<input ng-model="profile.age">
+</md-input-container>
+
+<md-button ng-click="saveProfile()" class="md-raised md-primary">Login</md-button>

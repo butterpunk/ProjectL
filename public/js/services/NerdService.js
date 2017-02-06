@@ -16,6 +16,19 @@ angular.module('NerdService', []).factory('Nerd', ['$http', function($http) {
             return $http.post('/verify')              
                     .success(function(data){})
                     .error(function(data){});
+        },
+        getProfile: function(user_id){
+             console.log('AH');
+            return $http.get('/api/profile?user_id='+user_id)              
+                    .success(function(data){
+                    })
+                    .error(function(data){
+                    });
+        },
+        postProfile: function(obj){
+            return $http.post('/api/profile',obj)              
+                    .success(function(data){})
+                    .error(function(data){});            
         }
     }     
 	
