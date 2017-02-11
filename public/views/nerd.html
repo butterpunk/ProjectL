@@ -2,3 +2,15 @@
 <a href="/property-profile">Create a Property Profile</a>
 
 <h1>We are in your map</h1>
+<div id="map">
+<ui-gmap-google-map center="map.center" zoom="map.zoom" options="options">
+   <!--  <ui-gmap-marker 
+        	ng-repeat="mark in marker"
+        	coords="mark.coords" 
+        	options="mark.options" 
+        	idkey="mark.id"
+        	events="map.event">
+        </ui-gmap-marker>  -->
+  <ui-gmap-marker coords="marker.coords" idkey="marker.id"></ui-gmap-marker>        
+</ui-gmap-google-map>
+</div>

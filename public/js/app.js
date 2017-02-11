@@ -1,1 +1,1 @@
- angular.module('sampleApp', ['ngRoute', 'appRoutes', 'MainCtrl', 'NerdCtrl', 'NerdService', 'GeekCtrl', 'GeekService','angulartics','angulartics.google.analytics', 'ngMaterial']);
+ angular.module('sampleApp', ['ngRoute', 'appRoutes', 'MainCtrl', 'NerdCtrl', 'PropertyCtrl','NerdService', 'GeekCtrl', 'GeekService','angulartics','angulartics.google.analytics', 'ngMaterial']);

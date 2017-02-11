@@ -6,8 +6,9 @@ const app = express()
 app.use(bodyParser.urlencoded({extended: true}))
 
 var Profile = require('./models/Nerd.js');
-var Post = require('./models/Challenge.js');
+//var Post = require('./models/Challenge.js');
 var User = require('./models/Users.js');
+var Property = require('./models/Property.js');
 
 module.exports = function(app,passport) {
 
@@ -32,8 +33,8 @@ module.exports = function(app,passport) {
 
     
     app.delete('/api/challenges',function(req,res){
-        
-        Challenge.findByIdAndRemove(req.body.id,function(err,chal){
+        console.log(req.body.id);
+        Property.findByIdAndRemove(req.body.id,function(err,chal){
             var response = {
                 message: "Challenge successfully delted",
                 id: chal.id
@@ -42,7 +43,9 @@ module.exports = function(app,passport) {
         })
     });
 
-    
+    // =====================================
+    // PROFILE ROUTES =====================
+    // =====================================    
     app.get('/api/profile', function(req, res) {
         console.log(req.query.user_id);
         Profile.findOne({'user_id': req.query.user_id}, function(err,prof){
@@ -83,7 +86,77 @@ module.exports = function(app,passport) {
             }   
         });
     });
+    // =====================================
+    // PROFILE ROUTES END =====================
+    // =====================================  
 
+    // =====================================
+    // PROPERTY ROUTES =====================
+    // =====================================    
+    app.get('/api/property', function(req, res) {
+        console.log(req.query.user_id);
+        Property.find({'user_id': req.query.user_id}, function(err,prof){
+            if(err){
+                console.log('ERROR:', err);
+            }else if(prof){
+                console.log('IN ELSE IF: PROPERY ', prof);
+                res.json(prof);
+            }else{
+                console.log('IN ELSE: PROPERTY', prof);
+                res.json({message: "Profile doesnt exist"});
+
+            }   
+        });
+
+    }); 
+
+    // use mongoose to get all nerds in the database
+     app.get('/api/all/property', function(req, res) {   
+        Property.find(function(err, nerds) {
+            console.log('here');
+            if (err)
+                res.send(err);
+
+            res.json(nerds); // return all nerds in JSON format
+        });
+    });
+
+    app.get('/api/all/property', isLoggedIn, function(req, res) {
+        console.log(req.query.user_id);
+        Property.find({'user_id': req.query.user_id}, function(err,prof){
+            if(err){
+                console.log('ERROR:', err);
+            }else if(prof){
+                console.log('IN ELSE IF: PROPERY ', prof);
+                res.json(prof);
+            }else{
+                console.log('IN ELSE: PROPERTY', prof);
+                res.json({message: "Profile doesnt exist"});
+
+            }   
+        });
+
+    }); 
+
+    app.post('/api/property', function(req, res){
+        console.log(req.body);
+        var property = new Property();
+        property.address = req.body.address;
+        property.price = req.body.price;
+        property.user_id = req.body.user_id;
+        console.log(property);
+        property.save(function(err){
+            console.log(property)
+            if (err){
+                res.send(err);
+            }
+            res.json({message: "Post Created!"})
+        });
+    
+    });
+    // =====================================
+    // PROPERTY ROUTES END =====================
+    // =====================================  
     app.get('/user', function(req,res){
         User.find(function(err, nerds) {
 
@@ -120,7 +193,10 @@ module.exports = function(app,passport) {
         res.redirect('/');
     });
 
-    app.get('/auth/facebook', passport.authenticate('facebook', { 'scope' : 'email' }));
+   // app.get('/auth/facebook', passport.authenticate('facebook', { 'scope' : 'email' }));
+   app.get('/auth/facebook', passport.authenticate('facebook'), function(req, res){
+        console.log('in the facebook login');
+   });
    /*
     app.get('/auth/facebook', function(req, res, next){
         passport.authenticate('facebook')(req, res, next);
@@ -186,10 +262,11 @@ app.post('/api/user/login', function(req, res, next) {
 	// frontend routes =========================================================
 
 	// route to handle all angular requests
+    
 	app.get('*', function(req, res) {
 		res.sendfile('./public/index.html');
 	});
-
+    
     app.post('/verify', isLoggedIn, function(req, res){
         response = {
             message : "YES",

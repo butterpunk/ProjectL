@@ -13,11 +13,21 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
 			controller: 'MainController'
 		})
 
+		.when('/property-profile', {
+			templateUrl: 'views/property.html',
+			controller: 'PropertyController'
+		})
+
 		.when('/profile', {
 			templateUrl: 'views/geek.html',
 			controller: 'GeekController'	
 		});
+		/*
+		.when('/auth/facebook', {
+			templateUrl: 'views/geek.html',
+			controller: 'GeekController'	
+		});*/
 
-	$locationProvider.html5Mode(true);
+	//$locationProvider.html5Mode(true);
 
 }]);

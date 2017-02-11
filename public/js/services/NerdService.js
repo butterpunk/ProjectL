@@ -29,7 +29,27 @@ angular.module('NerdService', []).factory('Nerd', ['$http', function($http) {
             return $http.post('/api/profile',obj)              
                     .success(function(data){})
                     .error(function(data){});            
-        }
+        },
+        getProperty: function(user_id){
+            return $http.get('/api/property?user_id='+user_id)              
+                    .success(function(data){
+                    })
+                    .error(function(data){
+                    });
+        },
+        getAllProperty: function(){
+            return $http.get('/api/all/property')              
+                    .success(function(data){
+                    })
+                    .error(function(data){
+                    });
+        },        
+        postProperty: function(obj){
+            console.log(obj);
+            return $http.post('/api/property',obj)              
+                    .success(function(data){})
+                    .error(function(data){});            
+        }  
     }     
 	
 
