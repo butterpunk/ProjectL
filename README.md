@@ -10,7 +10,7 @@
 
 ## Tools used
 
-Node.js API, MONGO DB, Mongoose ORM, Angualar.js, PassportJS local auth fb auth, AWS S3 for photo upload. 
+Node.js API, MONGO DB, Mongoose ODM, Angualar.js, PassportJS local auth fb auth, AWS S3 for photo upload. 
 
 in /app/config there is an empty string where the mongodb URL should be placed (db.js) . Same with credentials for AWS (aws.js), Credentials for Facebook auth (auth.js)
 
