@@ -1,13 +1,108 @@
-<div class="project-l">
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="/map">Map</a></li>
+            <li><a href="/profile">Personal Profile</a></li>
+            <li><a href="/property-profile">Property Profile</a></li>        
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="/property-profile">Logout</a></li>        
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+    <div style="width: 400px; margin: auto; margin-top: 110px;" class="project-l">
+      <h4>{{profile.name}}'s Profile</h4>
+    <md-radio-group ng-model="profile.leasor">
+      <md-radio-button value="true" class="md-primary">Leasor</md-radio-button>
+      <md-radio-button value="false">Rentor</md-radio-button>
+    </md-radio-group>
 	<md-input-container class="md-block" flex-gt-sm>
 		<label>Name</label>
 		<input ng-model="profile.name">
 	</md-input-container>
-
-	<md-input-container class="md-block" flex-gt-sm>
-		<label>Age</label>
-		<input ng-model="profile.age">
+	<md-input-container  ng-hide="leasor_flag"  class="md-block" flex-gt-sm>
+		<label>Occupation</label>
+		<input ng-model="profile.occupation">
 	</md-input-container>
-
+	<md-input-container class="md-block" flex-gt-sm>
+		<label>Date of Birth</label>
+		<input ng-model="profile.dob">
+	</md-input-container>
+	<md-input-container class="md-block" flex-gt-sm>
+		<label>Phone Number</label>
+		<input ng-model="profile.phone_number">
+	</md-input-container>
+	<md-input-container class="md-block" flex-gt-sm>
+		<label>Email</label>
+		<input ng-model="profile.email">
+	</md-input-container>
+	<md-input-container class="md-block" flex-gt-sm>
+		<label>Current Address</label>
+		<input ng-model="profile.current_address">
+	</md-input-container>
+	<md-input-container ng-hide="leasor_flag" class="md-block" flex-gt-sm>
+		<label>Income</label>
+		<input ng-model="profile.income">
+	</md-input-container>
+	<md-input-container ng-hide="leasor_flag" class="md-block" flex-gt-sm>
+		<label>Credit Score</label>
+		<input ng-model="profile.credit_score">
+	</md-input-container>
+	<md-input-container  ng-hide="leasor_flag"  class="md-block" flex-gt-sm>
+		<label>Criminal Check</label>
+		<input ng-model="profile.credit_check">
+	</md-input-container>
+	<md-input-container class="md-block" flex-gt-sm>
+		<label>Current Employer</label>
+		<input ng-model="profile.employer">
+	</md-input-container>
+	<md-input-container class="md-block" flex-gt-sm>
+		<label>Animal?</label>
+		<input ng-model="profile.exist">
+	</md-input-container>
+	<md-input-container class="md-block" flex-gt-sm>
+		<label>Breed</label>
+		<input ng-model="profile.breed">
+	</md-input-container>
+	<md-input-container class="md-block" flex-gt-sm>
+		<label>Education</label>
+		<input ng-model="profile.education">
+	</md-input-container>
+	<md-input-container class="md-block" flex-gt-sm>
+		<label>Facebook</label>
+		<input ng-model="profile.facebook">
+	</md-input-container>
+	<md-input-container class="md-block" flex-gt-sm>
+		<label>Google</label>
+		<input ng-model="profile.google">
+	</md-input-container>
+	<md-input-container class="md-block" flex-gt-sm>
+		<label>Linkedin</label>
+		<input ng-model="profile.linked">
+	</md-input-container>
+	<md-input-container class="md-block" flex-gt-sm>
+		<label>Hobbies</label>
+		<input ng-model="profile.hobbies">
+	</md-input-container>
+	<md-input-container class="md-block" flex-gt-sm>
+		<label>Reference Name</label>
+		<input ng-model="profile.reference_name">
+	</md-input-container>
+	<md-input-container class="md-block" flex-gt-sm>
+		<label>Reference Number</label>
+		<input ng-model="profile.reference_number">
+	</md-input-container>
+	<input class="btn btn-secondary" ng-click="uploadedFile()" type="file" id="file" name="file"/>
 	<md-button ng-click="saveProfile()" class="md-raised md-primary">Save Profile</md-button>
 </div>

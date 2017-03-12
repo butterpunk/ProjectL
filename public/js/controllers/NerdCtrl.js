@@ -11,11 +11,11 @@ angular.module('NerdCtrl', []).controller('NerdController', function($scope,$htt
 
 		}
 	});
-	/*
+	
 	$scope.loginfacebook = function(){
-		$location.path("/auth/facebook");
+		window.location.href = '/auth/facebook';
 	}
-	*/
+	
 	$scope.login = function(){
 		Nerd.getLogin($scope.user).then(function(res){
 			if(res.data.success == true){

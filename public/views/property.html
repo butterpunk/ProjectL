@@ -1,4 +1,24 @@
 <div class="project-l">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="/map">Map</a></li>
+            <li><a href="/profile">Personal Profile</a></li>
+            <li><a href="/property-profile">Property Profile</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+	<h4>Edit infromation for your property at {{property.address}}</h4>
 	<md-input-container class="md-block" flex-gt-sm>
 		<label>address</label>
 		<input ng-model="property.address">
@@ -9,5 +29,25 @@
 		<input ng-model="property.price">
 	</md-input-container>
 
+	<md-input-container class="md-block" flex-gt-sm>
+		<label>bedrooms</label>
+		<input ng-model="property.bedrooms">
+	</md-input-container>
+
+	<md-input-container class="md-block" flex-gt-sm>
+		<label>bathrooms</label>
+		<input ng-model="property.bathrooms">
+	</md-input-container>
+
+	<md-input-container class="md-block" flex-gt-sm>
+		<label>Date Available</label>
+		<input ng-model="property.date_avail">
+	</md-input-container>
+
+	<md-input-container class="md-block" flex-gt-sm>
+		<label>Parking Type</label>
+		<input ng-model="property.streets">
+	</md-input-container>
+	<input class="btn btn-secondary" ng-click="uploadedFile()" type="file" id="file" name="file"/>
 	<md-button ng-click="saveProperty()" class="md-raised md-primary">Save Property</md-button>
 </div>

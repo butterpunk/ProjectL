@@ -26,6 +26,7 @@ angular.module('NerdService', []).factory('Nerd', ['$http', function($http) {
                     });
         },
         postProfile: function(obj){
+            console.log(obj);
             return $http.post('/api/profile',obj)              
                     .success(function(data){})
                     .error(function(data){});            
@@ -49,6 +50,14 @@ angular.module('NerdService', []).factory('Nerd', ['$http', function($http) {
             return $http.post('/api/property',obj)              
                     .success(function(data){})
                     .error(function(data){});            
+        },
+        setAttachment: function(value){
+
+        },
+        getFB: function(value){
+            $http.get('auth/facebook')
+                .success(function(data){})
+                .error(function(data){});  
         }  
     }     
 	
